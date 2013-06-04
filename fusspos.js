@@ -133,7 +133,9 @@ Fusspos.prototype._getBestFit = function (description, text, start) {
     for (var n = 0, s = sugestions.length; n < s; n++) {
       // Move the search position in the in the correct direction
       searchPosition = sugestions[n].search + (direction ? 1 : -1);
-      
+      if (searchPosition < 0) searchPosition = 0;
+      if (searchPosition >= text.length) searchPosition = text.length - 1;
+
       // Do a surounding search for the description word in the text
       found = near(text, description[descriptionIndex], searchPosition);
 

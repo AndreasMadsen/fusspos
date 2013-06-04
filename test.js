@@ -174,3 +174,36 @@ test('the text do not contain all the description words', function (t) {
   });
   t.end();
 });
+
+test('the expected position won\'t go out of range', function (t) {
+  t.test('to the left', function (t) {
+    var description = ['a', 'long', 'b'];
+    var text = ['long', 'b', 'e'];
+  
+    t.deepEqual(fusspos(description, text), {
+      first: 0,
+      start: 0,
+      middle: 0,
+      end: 1,
+      last: 1,
+      fussy: 3/9
+    });
+    t.end();
+  });
+
+  t.test('to the right', function (t) {
+    var description = ['a', 'long', 'b'];
+    var text = ['e', 'a', 'long'];
+  
+    t.deepEqual(fusspos(description, text), {
+      first: 1,
+      start: 1,
+      middle: 1,
+      end: 2,
+      last: 2,
+      fussy: 1/3
+    });
+    t.end();
+  });
+  t.end();
+});
