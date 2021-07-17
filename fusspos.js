@@ -1,5 +1,5 @@
 
-var near = require('near');
+var near = require('indexof-surrounding');
 
 function Fusspos(description, text) {
   if (!(this instanceof Fusspos)) return new Fusspos(description, text);
@@ -71,7 +71,7 @@ Fusspos.prototype._getStartingWord = function (description, text) {
   var longwords = description.map(function (word, index) {
     return {
       'word': word,
-      'index': index 
+      'index': index
     };
   }).sort(function (a, b) {
     return b.word.length - a.word.length;
@@ -103,7 +103,7 @@ Fusspos.prototype._getBestFit = function (description, text, start) {
 
   var descriptionIndex = start.descriptionIndex;
   var direction = 1; // 1: right, 0: left
-  
+
   var found = -1, maxIndex = -1, maxValue = 0, searchPosition;
 
   var loops = 0;
@@ -159,7 +159,7 @@ Fusspos.prototype._getBestFit = function (description, text, start) {
     }
 
     // if there are more than one sugestion and there has been made more than 3
-    // loops then start removing the worst cases. 
+    // loops then start removing the worst cases.
     if (sugestions.length > 1 && loops > 3) {
       sugestions.splice(maxIndex, 1);
     }
